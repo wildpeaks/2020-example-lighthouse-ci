@@ -1,0 +1,33 @@
+name: Lighthouse CI
+on:
+    push:
+        branches:
+            - "**"
+    pull_request:
+        branches:
+            - master
+jobs:
+    tests:
+        timeout-minutes: 10
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download sources
+              uses: actions/checkout@v1
+
+            - name: Use Node LTS
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12.x
+
+            # - name: Simulate a build and tests
+            #   run: |
+            #       npm install
+            #       npm run build
+            #       npm run test
+
+            - name: Run Lighthouse
+              run: |
+                  npm install -g @lhci/cli
+                  lhci autorun
+              env:
+                  LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

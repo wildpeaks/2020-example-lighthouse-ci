@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "example",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
